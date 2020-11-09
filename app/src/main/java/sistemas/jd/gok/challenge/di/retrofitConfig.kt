@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import sistemas.jd.gok.challenge.BuildConfig
 import java.util.concurrent.TimeUnit
 
-const val API_URL = "https://7hgi9vtkdc.execute-api.sa-east-1.amazonaws.com/sandbox/"
+const val API_URL = "https://7hgi9vtkdc.execute-api.sa-east-1.amazonaws.com/sandbox"
 
 const val CONNECTION_TIMEOUT = 60000L
 
