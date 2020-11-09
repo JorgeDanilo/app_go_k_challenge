@@ -1,7 +1,7 @@
 package sistemas.jd.gok.challenge.di
 
 import org.koin.dsl.module
-import sistemas.jd.gok.challenge.model.api.ProductApi
+import sistemas.jd.gok.challenge.resources.remote.api.ProductApi
 
 val uiModule = module {
 

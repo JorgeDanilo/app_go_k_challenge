@@ -1,6 +1,6 @@
-package sistemas.jd.gok.challenge.model.entity
+package sistemas.jd.gok.challenge.domain.model
 
-data class Result(
+data class ProductResponse(
     val cash: Cash,
     val products: List<Product>,
     val spotlight: List<Spotlight>
