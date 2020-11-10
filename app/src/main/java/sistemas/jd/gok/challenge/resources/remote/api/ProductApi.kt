@@ -6,6 +6,6 @@ import sistemas.jd.gok.challenge.domain.model.ProductResponse
 
 interface ProductApi {
 
-    @GET("/products")
+    @GET("products")
     fun getAll(): Deferred<ProductResponse>
 }

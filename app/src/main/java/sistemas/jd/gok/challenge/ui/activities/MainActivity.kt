@@ -1,11 +1,11 @@
 package sistemas.jd.gok.challenge.ui.activities
 
 import android.os.Bundle
-import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import sistemas.jd.gok.challenge.R
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import sistemas.jd.gok.challenge.ui.adapters.SpotlightAdapter
 import sistemas.jd.gok.challenge.viewmodel.MainViewModel
 import sistemas.jd.gok.challenge.databinding.ActivityMainBinding as Binding
 
@@ -20,8 +20,9 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         hideActionBar()
+        viewModel.getAll()
         configureView()
-        observerProducts()
+        observerSpotlight()
     }
 
     private fun configureView() {
@@ -29,9 +30,9 @@ class MainActivity : BaseActivity() {
         binding?.lifecycleOwner = this
     }
 
-    private fun observerProducts() {
-        viewModel.products.observe(this, Observer {data ->
-            Log.i("PRODUCTS", data.products.first().name)
+    private fun observerSpotlight() {
+        viewModel.products.observe(this, Observer { data ->
+            binding?.rvSpotlight?.adapter = SpotlightAdapter(data.spotlight, this)
         })
     }
 }
