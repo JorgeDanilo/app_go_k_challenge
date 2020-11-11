@@ -11,7 +11,6 @@ import sistemas.jd.gok.challenge.domain.model.Spotlight
 
 class SpotlightAdapter(
     private val spotlights: List<Spotlight>,
-    private val mActivity: Activity
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

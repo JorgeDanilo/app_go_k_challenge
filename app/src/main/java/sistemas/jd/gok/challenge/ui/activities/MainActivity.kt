@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import sistemas.jd.gok.challenge.R
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import sistemas.jd.gok.challenge.ui.adapters.SpotlightAdapter
+import sistemas.jd.gok.challenge.utils.LinePagerIndicatorDecoration
 import sistemas.jd.gok.challenge.viewmodel.MainViewModel
 import sistemas.jd.gok.challenge.databinding.ActivityMainBinding as Binding
 
@@ -31,8 +32,9 @@ class MainActivity : BaseActivity() {
     }
 
     private fun observerSpotlight() {
+        binding?.rvSpotlight?.addItemDecoration(LinePagerIndicatorDecoration())
         viewModel.products.observe(this, Observer { data ->
-            binding?.rvSpotlight?.adapter = SpotlightAdapter(data.spotlight, this)
+            binding?.rvSpotlight?.adapter = SpotlightAdapter(data.spotlight)
         })
     }
 }
