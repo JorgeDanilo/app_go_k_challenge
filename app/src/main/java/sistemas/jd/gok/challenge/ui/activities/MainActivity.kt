@@ -1,14 +1,15 @@
 package sistemas.jd.gok.challenge.ui.activities
 
 import android.os.Bundle
+import android.util.DisplayMetrics
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import sistemas.jd.gok.challenge.R
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import sistemas.jd.gok.challenge.ui.adapters.SpotlightAdapter
-import sistemas.jd.gok.challenge.utils.LinePagerIndicatorDecoration
+import sistemas.jd.gok.challenge.R
+import sistemas.jd.gok.challenge.ui.adapters.SpotlightAdapterViewPager
 import sistemas.jd.gok.challenge.viewmodel.MainViewModel
 import sistemas.jd.gok.challenge.databinding.ActivityMainBinding as Binding
+
 
 class MainActivity : BaseActivity() {
 
@@ -23,6 +24,7 @@ class MainActivity : BaseActivity() {
         hideActionBar()
         viewModel.getAll()
         configureView()
+        setupViewPager()
         observerSpotlight()
     }
 
@@ -32,9 +34,14 @@ class MainActivity : BaseActivity() {
     }
 
     private fun observerSpotlight() {
-        binding?.rvSpotlight?.addItemDecoration(LinePagerIndicatorDecoration())
         viewModel.products.observe(this, Observer { data ->
-            binding?.rvSpotlight?.adapter = SpotlightAdapter(data.spotlight)
+            binding?.viewPagerSpotligth?.adapter = SpotlightAdapterViewPager(data.spotlight, this)
         })
+    }
+
+    private fun setupViewPager() {
+        binding?.viewPagerSpotligth?.pageMargin = -60
+        binding?.viewPagerSpotligth?.isHorizontalFadingEdgeEnabled = true
+        binding?.viewPagerSpotligth?.setFadingEdgeLength(40)
     }
 }
