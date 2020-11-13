@@ -95,6 +95,9 @@ dependencies {
     /* FRESCO */
     implementation("com.facebook.fresco:fresco:2.0.0")
 
+    /* IMAGE CIRCLE*/
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
     /* TESTES */
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

@@ -30,4 +30,8 @@ open class BaseActivity: AppCompatActivity() {
             .addToBackStack(backStackStateName)
             .commit()
     }
+
+    protected fun hideActionBar() {
+        supportActionBar?.hide();
+    }
 }
