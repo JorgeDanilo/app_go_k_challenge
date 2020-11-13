@@ -9,9 +9,11 @@ import com.google.gson.Gson
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import sistemas.jd.gok.challenge.R
 import sistemas.jd.gok.challenge.domain.model.ProductResponse
+import sistemas.jd.gok.challenge.domain.model.Spotlight
 import sistemas.jd.gok.challenge.ui.adapters.SpotlightAdapterViewPager
 import sistemas.jd.gok.challenge.ui.fragments.CashFragment
 import sistemas.jd.gok.challenge.ui.fragments.ProductsFragment
+import sistemas.jd.gok.challenge.ui.fragments.SpotligthFragment
 import sistemas.jd.gok.challenge.utils.LoadingState
 import sistemas.jd.gok.challenge.viewmodel.MainViewModel
 import sistemas.jd.gok.challenge.databinding.ActivityMainBinding as Binding
@@ -30,7 +32,6 @@ class MainActivity : BaseActivity() {
         hideActionBar()
         initializeData()
         configureView()
-        setupViewPager()
         setupObservers()
     }
 
@@ -45,7 +46,7 @@ class MainActivity : BaseActivity() {
 
     private fun setupObservers() {
         viewModel.products.observe(this, Observer { data ->
-            binding?.viewPagerSpotligth?.adapter = SpotlightAdapterViewPager(data.spotlight, this)
+            addFragmentSpotligth(data.spotlight)
             addCashFragment(data)
             addProductFragment(data)
         })
@@ -62,6 +63,15 @@ class MainActivity : BaseActivity() {
     private fun showScreenError() {
         binding?.progressBar?.visibility = View.GONE
         startActivity(Intent(this, ScreenErrorActivity::class.java))
+    }
+
+    private fun addFragmentSpotligth(data: List<Spotlight>) {
+        val spotligthFragment = SpotligthFragment.newInstance(Gson().toJson(data))
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.spotligthFragment, spotligthFragment, "spotligthFragment")
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun addProductFragment(data: ProductResponse) {
@@ -82,11 +92,5 @@ class MainActivity : BaseActivity() {
             .replace(R.id.cashFragment, cashFragment, "cashFragment")
             .addToBackStack(null)
             .commit()
-    }
-
-    private fun setupViewPager() {
-        binding?.viewPagerSpotligth?.pageMargin = -60
-        binding?.viewPagerSpotligth?.isHorizontalFadingEdgeEnabled = true
-        binding?.viewPagerSpotligth?.setFadingEdgeLength(40)
     }
 }
