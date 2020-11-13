@@ -24,7 +24,7 @@ buildscript {
         lottie_version = "3.5.0"
         mockk_version = "1.10.2"
         koin_test = "2.0.1"
-        mock_web_server = "4.9.0"
+        mock_web_server = "3.11.0"
         android_arch_core_testing = "1.1.1"
         rule = "1.0.2"
     }
