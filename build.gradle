@@ -18,6 +18,10 @@ buildscript {
         version_room_coroutine = "2.1.0-alpha04"
         version_app_center = "2.2.0"
         koin_version = "2.0.1"
+        fresco_version = "2.0.0"
+        circle_image = "3.1.0"
+        glide_version = "4.9.0"
+        lottie_version = "3.5.0"
     }
     repositories {
         google()

@@ -1,16 +1,18 @@
 package sistemas.jd.gok.challenge.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.google.gson.Gson
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import sistemas.jd.gok.challenge.R
 import sistemas.jd.gok.challenge.domain.model.ProductResponse
-import sistemas.jd.gok.challenge.domain.model.User
 import sistemas.jd.gok.challenge.ui.adapters.SpotlightAdapterViewPager
 import sistemas.jd.gok.challenge.ui.fragments.CashFragment
 import sistemas.jd.gok.challenge.ui.fragments.ProductsFragment
+import sistemas.jd.gok.challenge.utils.LoadingState
 import sistemas.jd.gok.challenge.viewmodel.MainViewModel
 import sistemas.jd.gok.challenge.databinding.ActivityMainBinding as Binding
 
@@ -26,16 +28,19 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         hideActionBar()
-        viewModel.getAll()
+        initializeData()
         configureView()
         setupViewPager()
         setupObservers()
     }
 
+    private fun initializeData() {
+        viewModel.getAll()
+    }
+
     private fun configureView() {
         binding?.viewModel = viewModel
         binding?.lifecycleOwner = this
-        binding?.user = User()
     }
 
     private fun setupObservers() {
@@ -44,6 +49,19 @@ class MainActivity : BaseActivity() {
             addCashFragment(data)
             addProductFragment(data)
         })
+
+        viewModel.loadingState.observe(this, Observer {
+            when(it.status) {
+                LoadingState.Status.FAILED -> showScreenError()
+                LoadingState.Status.RUNNING -> binding?.progressBar?.visibility = View.VISIBLE
+                LoadingState.Status.SUCCESS -> binding?.progressBar?.visibility = View.GONE
+            }
+        })
+    }
+
+    private fun showScreenError() {
+        binding?.progressBar?.visibility = View.GONE
+        startActivity(Intent(this, ScreenErrorActivity::class.java))
     }
 
     private fun addProductFragment(data: ProductResponse) {
