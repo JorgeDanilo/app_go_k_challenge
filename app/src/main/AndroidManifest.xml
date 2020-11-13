@@ -13,7 +13,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Go_k_challenge">
-        <activity android:name=".ui.activities.ScreenErrorActivity"></activity>
+        <activity
+            android:name=".ui.activities.SplashActivity"
+            android:label="@string/title_activity_splash"
+            android:theme="@style/Theme.Go_k_challenge.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.activities.ScreenErrorActivity" />
         <activity android:name=".ui.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
