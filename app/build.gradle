@@ -11,7 +11,7 @@ androidExtensions {
 
 android {
 
-    buildFeatures{
+    buildFeatures {
         dataBinding = true
         viewBinding = true
     }
@@ -105,4 +105,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:2.2.2"
     androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:2.0'
+    testImplementation "io.mockk:mockk:$mockk_version"
+    androidTestImplementation "org.koin:koin-test:$koin_test"
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:$mock_web_server"
+    testImplementation "android.arch.core:core-testing:$android_arch_core_testing"
 }
